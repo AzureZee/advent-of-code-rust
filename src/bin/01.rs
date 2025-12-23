@@ -1,10 +1,14 @@
 advent_of_code::solution!(1);
 
-pub fn part_one(input: &str) -> Option<u64> {
-    let s = input
+fn parse(input: &str) -> Vec<u64> {
+    input
         .lines()
         .map(|line| line.parse::<u64>().unwrap())
-        .collect::<Vec<_>>();
+        .collect()
+}
+
+pub fn part_one(input: &str) -> Option<u64> {
+    let s: Vec<u64> = parse(input);
     let end = s.len() - 1;
 
     for i in 0..end - 1 {
@@ -20,10 +24,7 @@ pub fn part_one(input: &str) -> Option<u64> {
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let s = input
-        .lines()
-        .map(|line| line.parse::<u64>().unwrap())
-        .collect::<Vec<_>>();
+    let s: Vec<u64> = parse(input);
     let end = s.len() - 1;
 
     for i in 0..end - 2 {

@@ -4,17 +4,19 @@ advent_of_code::solution!(2);
 // ["1", "3", "b", "cdefg"]
 // ["2", "9", "c", "ccccccccc"]
 
-pub fn part_one(input: &str) -> Option<u64> {
-    let s = input
+fn parse(input: &str) -> Vec<Vec<&str>> {
+    input
         .lines()
         .map(|line| {
-            let pair = line
-                .split(&['-', ':', ' '][..])
+            line.split(&['-', ':', ' '][..])
                 .filter(|s| !s.is_empty())
-                .collect::<Vec<_>>();
-            pair
+                .collect::<Vec<_>>()
         })
-        .collect::<Vec<_>>();
+        .collect()
+}
+
+pub fn part_one(input: &str) -> Option<u64> {
+    let s: Vec<Vec<&str>> = parse(input);
     let mut result = 0;
     for v in s {
         let (min, max) = (
@@ -31,16 +33,7 @@ pub fn part_one(input: &str) -> Option<u64> {
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let s = input
-        .lines()
-        .map(|line| {
-            let pair = line
-                .split(&['-', ':', ' '][..])
-                .filter(|s| !s.is_empty())
-                .collect::<Vec<_>>();
-            pair
-        })
-        .collect::<Vec<_>>();
+    let s: Vec<Vec<&str>> = parse(input);
     let mut result = 0;
     for v in s {
         let (idx_1, idx_2) = (
