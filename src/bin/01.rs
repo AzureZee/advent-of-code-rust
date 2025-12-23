@@ -1,48 +1,43 @@
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u64> {
-    let list = input
+    let s = input
         .lines()
         .map(|line| line.parse::<u64>().unwrap())
         .collect::<Vec<_>>();
-    let end = list.len() - 1;
-    let mut res = 0;
-    for (i, a) in list.iter().enumerate() {
-        let j = if i + 1 < end {
-            i + 1
-        } else {
-            break;
-        };
-        for b in &list[j..end] {
-            let sum = a + b;
+    let end = s.len() - 1;
+
+    for i in 0..end - 1 {
+        for j in i + 1..end {
+            let sum = s[i] + s[j];
             if sum == 2020 {
-                res = a * b;
-                break;
+                let res = s[i] * s[j];
+                return Some(res);
             }
         }
     }
-    Some(res)
+    None
 }
 
 pub fn part_two(input: &str) -> Option<u64> {
-    let list = input
+    let s = input
         .lines()
         .map(|line| line.parse::<u64>().unwrap())
         .collect::<Vec<_>>();
-    let end = list.len() - 1;
-    let mut res = 0;
+    let end = s.len() - 1;
+
     for i in 0..end - 2 {
         for j in i + 1..end - 1 {
             for k in j + 1..end {
-                let sum = list[i] + list[j] + list[k];
+                let sum = s[i] + s[j] + s[k];
                 if sum == 2020 {
-                    res = list[i] * list[j] * list[k];
-                    break;
+                    let res = s[i] * s[j] * s[k];
+                    return Some(res);
                 }
             }
         }
     }
-    Some(res)
+    None
 }
 
 #[cfg(test)]
